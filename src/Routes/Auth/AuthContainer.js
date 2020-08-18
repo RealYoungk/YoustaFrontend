@@ -11,7 +11,7 @@ export default () => {
   const firstName = useInput("");
   const lastName = useInput("");
   const secret = useInput("");
-  const email = useInput("9725394@naver.com");
+  const email = useInput("");
   const [requestSecretMutation] = useMutation(LOG_IN, {
     variables: { email: email.value },
   });
@@ -23,14 +23,12 @@ export default () => {
       lastName: lastName.value,
     },
   });
-
   const [confirmSecretMutation] = useMutation(CONFIRM_SECRET, {
     variables: {
       email: email.value,
       secret: secret.value,
     },
   });
-
   const [localLogInMutation] = useMutation(LOCAL_LOG_IN);
 
   const onSubmit = async (e) => {
@@ -41,7 +39,6 @@ export default () => {
           const {
             data: { requestSecret },
           } = await requestSecretMutation();
-          console.log(requestSecret);
           if (!requestSecret) {
             toast.error("You dont have an account yet, create one");
             setTimeout(() => setAction("signUp"), 3000);
@@ -84,14 +81,14 @@ export default () => {
           const {
             data: { confirmSecret: token },
           } = await confirmSecretMutation();
-
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
           } else {
             throw Error();
           }
-        } catch {
-          toast.error("Can't confirm secret, check again");
+        } catch (error) {
+          console.log(error);
+          toast.error("Cant confirm secret,check again");
         }
       }
     }
