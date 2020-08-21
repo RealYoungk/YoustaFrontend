@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
@@ -54,6 +55,8 @@ export default () => {
           <Post
             key={post.id}
             id={post.id}
+            location={post.location}
+            caption={post.location}
             user={post.user}
             files={post.files}
             likeCount={post.likeCount}
