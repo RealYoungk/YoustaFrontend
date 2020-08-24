@@ -8,7 +8,7 @@ import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   user-select: none;
   margin-bottom: 25px;
 `;
@@ -31,20 +31,20 @@ const Location = styled.span`
 
 const Files = styled.div`
   position: relative;
-  padding-top: 70%;
+  padding-bottom: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   flex-shrink: 0;
 `;
 
-const File = styled.img`
+const File = styled.div`
   max-width: 100%;
   width: 100%;
-  height: 200px;
+  height: 600px;
   position: absolute;
-  top: 0px;
-  background-image: url(${(props) => props.src});
+  top: 0;
+  background-image: url(${(props) => props.src}});
   background-size: cover;
   background-position: center;
   opacity: ${(props) => (props.showing ? 1 : 0)};
@@ -77,7 +77,6 @@ const Timestamp = styled.span`
   margin: 10px 0px;
   padding-bottom: 10px;
   border-bottom: ${(props) => props.theme.lightGreyColor} 1px solid;
-  transition: opacity 0.5s linear;
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -85,7 +84,7 @@ const Textarea = styled(TextareaAutosize)`
   width: 100%;
   resize: none;
   font-size: 14px;
-  &: focus {
+  &:focus {
     outline: none;
   }
 `;
@@ -113,6 +112,7 @@ export default ({
   toggleLike,
   onKeyPress,
   comments,
+  selfComments,
 }) => (
   <Post>
     <Header>
@@ -125,7 +125,7 @@ export default ({
     <Files>
       {files &&
         files.map((file, index) => (
-          <File id={file.id} src={file.url} showing={index === currentItem} />
+          <File key={file.id} src={file.url} showing={index === currentItem} />
         ))}
     </Files>
     <Meta>
@@ -144,14 +144,20 @@ export default ({
               {comment.text}
             </Comment>
           ))}
+          {selfComments.map((comment) => (
+            <Comment key={comment.id}>
+              <FatText text={comment.user.username} />
+              {comment.text}
+            </Comment>
+          ))}
         </Comments>
       )}
       <Timestamp>{createdAt}</Timestamp>
       <Textarea
-        placeholder={"Add a Comment..."}
+        onKeyPress={onKeyPress}
+        placeholder={"Add a comment..."}
         value={newComment.value}
         onChange={newComment.onChange}
-        onKeyDown={onKeyPress}
       />
     </Meta>
   </Post>
