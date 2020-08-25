@@ -11,6 +11,9 @@ const Post = styled.div`
   max-width: 600px;
   user-select: none;
   margin-bottom: 25px;
+  a {
+    color: inherit;
+  }
 `;
 
 const Header = styled.header`
@@ -44,7 +47,7 @@ const File = styled.div`
   height: 600px;
   position: absolute;
   top: 0;
-  background-image: url(${(props) => props.src}});
+  background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
   opacity: ${(props) => (props.showing ? 1 : 0)};
