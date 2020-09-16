@@ -159,7 +159,6 @@ export default ({
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes    `} />
       <a href={vod} target="_blank" rel="noopener noreferrer">
         <FatText className="vodUrl" text={`[${vod}]`} />
-        <FatText>aa</FatText>
       </a>
 
       <Caption>
