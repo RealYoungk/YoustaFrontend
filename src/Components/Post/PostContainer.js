@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const PostContainer = ({
   id,
   user,
+  vod,
   files,
   likeCount,
   isLiked,
@@ -30,6 +31,16 @@ const PostContainer = ({
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value },
   });
+
+  // const thumbnail = () => {
+  //   const { url } = files[0];
+  //   console.log(url);
+  //   const vodUrl = url.substr(26, 11);
+  //   console.log(vodUrl);
+  //   const vod = `https://www.youtube.com/watch?v=${vodUrl}`;
+  //   console.log(vod);
+  // };
+
   const slide = () => {
     const totalFiles = files.length;
     if (currentItem === totalFiles - 1) {
@@ -72,6 +83,7 @@ const PostContainer = ({
   return (
     <PostPresenter
       user={user}
+      vod={vod}
       files={files}
       likeCount={likeCountS}
       location={location}

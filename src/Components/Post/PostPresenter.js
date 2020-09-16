@@ -35,7 +35,7 @@ const Location = styled.span`
 
 const Files = styled.div`
   position: relative;
-  padding-bottom: 100%;
+  padding-bottom: 50%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -45,7 +45,11 @@ const Files = styled.div`
 const File = styled.div`
   max-width: 100%;
   width: 100%;
-  height: 600px;
+  height: 300px;
+  /* height: 600px; */
+  /* width: 600px;
+  height: 360px; */
+
   position: absolute;
   top: 0;
   background-image: url(${(props) => props.src});
@@ -114,6 +118,7 @@ const Caption = styled.div`
 export default ({
   user: { username, avatar },
   location,
+  vod,
   files,
   isLiked,
   likeCount,
@@ -150,7 +155,12 @@ export default ({
           <CommentIcon />
         </Button>
       </Buttons>
-      <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+
+      <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes    `} />
+      <a href={vod} target="_blank" rel="noopener noreferrer">
+        <FatText className="vodUrl" text={`[${vod}]`} />
+      </a>
+
       <Caption>
         <FatText text={username} />
         {caption}

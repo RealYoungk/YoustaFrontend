@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
@@ -17,6 +17,7 @@ const FEED_QUERY = gql`
         avatar
         username
       }
+      vod
       files {
         id
         url
@@ -45,6 +46,7 @@ const Wrapper = styled.div`
 
 export default () => {
   const { data, loading } = useQuery(FEED_QUERY);
+
   return (
     <Wrapper>
       <Helmet>
@@ -61,6 +63,7 @@ export default () => {
             location={post.location}
             caption={post.caption}
             user={post.user}
+            vod={post.vod}
             files={post.files}
             likeCount={post.likeCount}
             isLiked={post.isLiked}
