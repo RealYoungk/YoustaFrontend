@@ -1,68 +1,81 @@
 import React from "react";
 import styled from "styled-components";
-import { Helmet } from "react-helmet";
-import Input from "../../Components/Input";
 import { UPLOAD } from "./UploadQueries";
-import FatText from "../../Components/FatText";
-import Button from "../../Components/Button";
-import useInput from "../../Hooks/useInput";
+import Input from "../../Components/Input";
 import { withRouter } from "react-router-dom";
+import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
+import { toast } from "react-toastify";
 import { ME } from "../../SharedQueries";
+import { Helmet } from "react-helmet";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
-  ${(props) => props.theme.whiteBox}
-  padding-top:30px;
-  padding-left: 30px;
-  min-height: 40vh;
-`;
-
-const Section = styled.div`
-  margin-bottom: 50px;
-  margin-right: 40px;
-  padding-top: 60%;
-  padding-left: 80%;
-  padding-right: 30%;
-  width: 30%;
+  ${(props) => props.theme.whiteBox} /* padding: 1rem; */
+  height: 50vh;
+  text-align: center;
 `;
 
 const UrlInput = styled(Input)`
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 80%;
   background-color: ${(props) => props.theme.lightGreyColor};
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 3px;
-  height: auto;
+  font-size: 1em;
   text-align: center;
-  width: 70%;
+`;
+
+const CaptionInput = styled(Input)`
+  background-color: ${(props) => props.theme.lightGreyColor};
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 80%;
+  font-size: 0.8em;
+  text-align: center;
+`;
+
+const Selection = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 180px;
+  width: 30%;
 `;
 
 export default withRouter(({ history }) => {
   const vod = useInput("");
-  const { data, loading } = useQuery(ME);
-  const caption = "sss";
-  const hash = "hash";
+  const caption = useInput("");
+  const [uploadMutation] = useMutation(UPLOAD, {
+    variables: {
+      caption: caption.value,
+      vod: vod.value,
+    },
+  });
 
-  const [uploadMutation] = useMutation(UPLOAD, { variables: { caption, vod: vod.value, hash } });
+  const { data } = useQuery(ME);
 
-  const onUploadSubmit = async () => {
-    await uploadMutation();
-    history.push(`/${data.me.username}`);
+  const onSubmit = async (e) => {
+    try {
+      await uploadMutation();
+      history.push(`/${data.me.username}`);
+    } catch (e) {
+      toast.error("Cant upload post");
+    }
   };
+
   return (
     <Wrapper>
-      <>
-        <Helmet>
-          <title>Upload | Prismagram</title>
-        </Helmet>
-        <FatText text="URL 링크 :" />
-        &nbsp;&nbsp;&nbsp;
-        <form>
-          <UrlInput url={vod.value} onChange={vod.onChange} placeholder={"vod"} />
-          <Section>
-            <Button text="Upload" onClick={onUploadSubmit} />
-          </Section>
-        </form>
-      </>
+      <Helmet>
+        <title>Upload | Prismagram</title>
+      </Helmet>
+      <form onSubmit={onSubmit}>
+        <UrlInput placeholder={"URL"} {...vod} />
+        <CaptionInput placeholder={"Caption"} {...caption} />
+        <Selection>
+          <Button text={"Upload"} />
+        </Selection>
+      </form>
     </Wrapper>
   );
 });

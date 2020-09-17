@@ -1,6 +1,6 @@
 import React from "react";
 import { gql } from "apollo-boost";
-import withRouter from "react-router-dom/withRouter";
+import { withRouter } from "react-router-dom";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import ProfilePresenter from "./ProfilePresenter";
 
@@ -19,9 +19,7 @@ const GET_USER = gql`
       postsCount
       posts {
         id
-        files {
-          url
-        }
+        vod
         likeCount
         commentCount
       }

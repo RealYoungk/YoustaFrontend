@@ -43,7 +43,6 @@ const NumberText = styled.span`
 `;
 
 const SquarePost = ({ likeCount, commentCount, vod }) => {
-  console.log(vod);
   return (
     <Container bg={`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`}>
       <Overlay>
