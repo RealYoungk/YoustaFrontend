@@ -11,6 +11,7 @@ const PostContainer = ({
   id,
   user,
   vod,
+  hashtags,
   files,
   likeCount,
   isLiked,
@@ -84,6 +85,7 @@ const PostContainer = ({
     <PostPresenter
       user={user}
       vod={vod}
+      hashtags={hashtags}
       files={files}
       likeCount={likeCountS}
       location={location}

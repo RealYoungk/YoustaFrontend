@@ -18,6 +18,10 @@ const FEED_QUERY = gql`
         username
       }
       vod
+      hashtags {
+        id
+        tag
+      }
       files {
         id
         url
@@ -64,6 +68,7 @@ export default () => {
             caption={post.caption}
             user={post.user}
             vod={post.vod}
+            hashtags={post.hashtags}
             files={post.files}
             likeCount={post.likeCount}
             isLiked={post.isLiked}

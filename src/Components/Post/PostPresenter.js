@@ -35,7 +35,7 @@ const Location = styled.span`
 
 const Files = styled.div`
   position: relative;
-  padding-bottom: 50%;
+  padding-bottom: 60%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -45,7 +45,8 @@ const Files = styled.div`
 const File = styled.div`
   max-width: 100%;
   width: 100%;
-  height: 300px;
+  /* height: 350px; */
+  height: 100%;
   /* height: 600px; */
   /* width: 600px;
   height: 360px; */
@@ -115,10 +116,19 @@ const Caption = styled.div`
   }
 `;
 
+const Hashtag = styled.div`
+  margin: 15px 0px;
+  color: violet;
+  span {
+    margin-right: 5px;
+  }
+`;
+
 export default ({
   user: { username, avatar },
   location,
   vod,
+  hashtags,
   files,
   isLiked,
   likeCount,
@@ -148,6 +158,12 @@ export default ({
         ))}
     </Files>
 
+    <Hashtag>
+      {hashtags.map((hashtag) => (
+        <FatText key={hashtag.id} text={`#${hashtag.tag}`}></FatText>
+      ))}
+    </Hashtag>
+
     <Meta>
       <Buttons>
         <Button onClick={toggleLike}>{isLiked ? <HeartFull /> : <HeartEmpty />}</Button>
@@ -160,7 +176,6 @@ export default ({
       <a href={vod} target="_blank" rel="noopener noreferrer">
         <FatText className="vodUrl" text={`[${vod}]`} />
       </a>
-
       <Caption>
         <FatText text={username} />
         {caption}
