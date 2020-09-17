@@ -42,25 +42,28 @@ const NumberText = styled.span`
   font-size: 16px;
 `;
 
-const SquarePost = ({ likeCount, commentCount, file }) => (
-  <Container bg={file.url}>
-    <Overlay>
-      <Number>
-        <HeartFull />
-        <NumberText>{likeCount}</NumberText>
-      </Number>
-      <Number>
-        <CommentFull />
-        <NumberText>{commentCount}</NumberText>
-      </Number>
-    </Overlay>
-  </Container>
-);
+const SquarePost = ({ likeCount, commentCount, vod }) => {
+  console.log(vod);
+  return (
+    <Container bg={`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`}>
+      <Overlay>
+        <Number>
+          <HeartFull />
+          <NumberText>{likeCount}</NumberText>
+        </Number>
+        <Number>
+          <CommentFull />
+          <NumberText>{commentCount}</NumberText>
+        </Number>
+      </Overlay>
+    </Container>
+  );
+};
 
 SquarePost.propTypes = {
   likeCount: PropTypes.number.isRequired,
   commentCount: PropTypes.number.isRequired,
-  file: PropTypes.object.isRequired,
+  vod: PropTypes.string.isRequired,
 };
 
 export default SquarePost;

@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { gql } from "apollo-boost";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
-import { Compass, HeartEmpty, User, Logo } from "./Icons";
+import { Compass, HeartEmpty, User, Logo, Upload } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 
@@ -87,6 +87,9 @@ export default withRouter(({ history }) => {
         <HeaderColumn>
           <HeaderLink to="/explore">
             <Compass />
+          </HeaderLink>
+          <HeaderLink to="/upload">
+            <Upload />
           </HeaderLink>
           <HeaderLink to="/notifications">
             <HeartEmpty />

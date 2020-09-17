@@ -129,12 +129,10 @@ export default ({
   location,
   vod,
   hashtags,
-  files,
   isLiked,
   likeCount,
   createdAt,
   newComment,
-  currentItem,
   toggleLike,
   onKeyPress,
   comments,
@@ -152,10 +150,11 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files &&
+      <File src={`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`} showing={true} />
+      {/* {files &&
         files.map((file, index) => (
           <File key={file.id} src={file.url} showing={index === currentItem} />
-        ))}
+        ))} */}
     </Files>
 
     <Hashtag>

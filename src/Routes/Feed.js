@@ -22,10 +22,6 @@ const FEED_QUERY = gql`
         id
         tag
       }
-      files {
-        id
-        url
-      }
       likeCount
       isLiked
       comments {
@@ -69,7 +65,6 @@ export default () => {
             user={post.user}
             vod={post.vod}
             hashtags={post.hashtags}
-            files={post.files}
             likeCount={post.likeCount}
             isLiked={post.isLiked}
             comments={post.comments}
