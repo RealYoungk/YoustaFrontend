@@ -7,4 +7,4 @@ mutation editPost($id:String!){
         id
     }
 }
-`
+`;
