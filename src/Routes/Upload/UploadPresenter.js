@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { UPLOAD } from "./UploadQueries";
 import Input from "../../Components/Input";
@@ -43,7 +43,7 @@ const Selection = styled.div`
   width: 30%;
 `;
 
-export default withRouter(({ history }) => {
+export default withRouter(({ history, location }) => {
   const vod = useInput("");
   const caption = useInput("");
   const [uploadMutation] = useMutation(UPLOAD, {
@@ -58,7 +58,8 @@ export default withRouter(({ history }) => {
   const onSubmit = async (e) => {
     try {
       await uploadMutation();
-      history.push(`/${data.me.username}`);
+      window.location.href = `/`;
+      // history.push(`/${data.me.username}`);
     } catch (e) {
       toast.error("Cant upload post");
     }

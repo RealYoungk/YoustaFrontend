@@ -83,6 +83,7 @@ export default ({ loading, data, logOut }) => {
         posts,
       },
     } = data;
+    console.log(posts);
     return (
       <Wrapper>
         <Helmet>
