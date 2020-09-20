@@ -67,7 +67,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
                 key={post.id}
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
-                file={post.files[0]}
+                vod={post.vod}
               />
             ))
           )}
@@ -80,6 +80,8 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
 SearchPresenter.propTypes = {
   searchTerm: PropTypes.string,
   loading: PropTypes.bool,
+  likeCount: PropTypes.number,
+  vod: PropTypes.string,
 };
 
 export default SearchPresenter;

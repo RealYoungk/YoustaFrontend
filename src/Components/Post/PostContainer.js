@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
-import { useMutation, useQuery } from "react-apollo-hooks";
+import { useMutation } from "react-apollo-hooks";
 import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
-import { ME } from "../../SharedQueries";
 import { toast } from "react-toastify";
 
 const PostContainer = ({
   id,
   user,
   vod,
-  files,
+  hashtags,
   likeCount,
   isLiked,
   comments,
@@ -21,37 +20,16 @@ const PostContainer = ({
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
-  const [currentItem, setCurrentItem] = useState(0);
+  // const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
   const comment = useInput("");
-  const { data: meQuery } = useQuery(ME);
+  // const { data } = useQuery(ME);
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id },
   });
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value },
   });
-
-  // const thumbnail = () => {
-  //   const { url } = files[0];
-  //   console.log(url);
-  //   const vodUrl = url.substr(26, 11);
-  //   console.log(vodUrl);
-  //   const vod = `https://www.youtube.com/watch?v=${vodUrl}`;
-  //   console.log(vod);
-  // };
-
-  const slide = () => {
-    const totalFiles = files.length;
-    if (currentItem === totalFiles - 1) {
-      setTimeout(() => setCurrentItem(0), 3000);
-    } else {
-      setTimeout(() => setCurrentItem(currentItem + 1), 3000);
-    }
-  };
-  useEffect(() => {
-    slide();
-  }, [currentItem]);
 
   const toggleLike = () => {
     toggleLikeMutation();
@@ -84,7 +62,7 @@ const PostContainer = ({
     <PostPresenter
       user={user}
       vod={vod}
-      files={files}
+      hashtags={hashtags}
       likeCount={likeCountS}
       location={location}
       caption={caption}
@@ -94,7 +72,6 @@ const PostContainer = ({
       newComment={comment}
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
-      currentItem={currentItem}
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
@@ -109,12 +86,7 @@ PostContainer.propTypes = {
     avatar: PropTypes.string,
     username: PropTypes.string.isRequired,
   }).isRequired,
-  files: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  vod: PropTypes.string.isRequired,
   likeCount: PropTypes.number.isRequired,
   isLiked: PropTypes.bool.isRequired,
   comments: PropTypes.arrayOf(

@@ -12,7 +12,17 @@ const Container = styled.input`
   padding: 0px 15px;
 `;
 
-const Input = ({ placeholder, required = true, value, onChange, type = "text", className }) => (
+const Input = ({
+  placeholder,
+  required = true,
+  value,
+  onChange,
+  type = "text",
+  className,
+  vod,
+  caption,
+  hashtags,
+}) => (
   <Container
     className={className}
     placeholder={placeholder}
@@ -20,6 +30,9 @@ const Input = ({ placeholder, required = true, value, onChange, type = "text", c
     value={value}
     onChange={onChange}
     type={type}
+    caption={caption}
+    vod={vod}
+    hashtags={hashtags}
   />
 );
 
@@ -29,6 +42,8 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
+  caption: PropTypes.string,
+  vod: PropTypes.string,
 };
 
 export default Input;

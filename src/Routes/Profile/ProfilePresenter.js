@@ -123,7 +123,7 @@ export default ({ loading, data, logOut }) => {
                 key={post.id}
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
-                file={post.files[0]}
+                vod={post.vod}
               />
             ))}
         </Posts>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
@@ -18,9 +18,9 @@ const FEED_QUERY = gql`
         username
       }
       vod
-      files {
+      hashtags {
         id
-        url
+        tag
       }
       likeCount
       isLiked
@@ -64,7 +64,7 @@ export default () => {
             caption={post.caption}
             user={post.user}
             vod={post.vod}
-            files={post.files}
+            hashtags={post.hashtags}
             likeCount={post.likeCount}
             isLiked={post.isLiked}
             comments={post.comments}

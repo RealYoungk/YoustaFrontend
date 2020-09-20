@@ -35,7 +35,7 @@ const Location = styled.span`
 
 const Files = styled.div`
   position: relative;
-  padding-bottom: 50%;
+  padding-bottom: 60%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -45,7 +45,8 @@ const Files = styled.div`
 const File = styled.div`
   max-width: 100%;
   width: 100%;
-  height: 300px;
+  /* height: 350px; */
+  height: 100%;
   /* height: 600px; */
   /* width: 600px;
   height: 360px; */
@@ -115,16 +116,23 @@ const Caption = styled.div`
   }
 `;
 
+const Hashtag = styled.div`
+  margin: 15px 15px;
+  color: violet;
+  span {
+    margin-right: 5px;
+  }
+`;
+
 export default ({
   user: { username, avatar },
   location,
   vod,
-  files,
+  hashtags,
   isLiked,
   likeCount,
   createdAt,
   newComment,
-  currentItem,
   toggleLike,
   onKeyPress,
   comments,
@@ -142,11 +150,18 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files &&
+      <File src={`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`} showing={true} />
+      {/* {files &&
         files.map((file, index) => (
           <File key={file.id} src={file.url} showing={index === currentItem} />
-        ))}
+        ))} */}
     </Files>
+
+    <Hashtag>
+      {hashtags.map((hashtag) => (
+        <FatText key={hashtag.id} text={`#${hashtag.tag}`}></FatText>
+      ))}
+    </Hashtag>
 
     <Meta>
       <Buttons>
@@ -154,12 +169,12 @@ export default ({
         <Button>
           <CommentIcon />
         </Button>
+        <a href={vod} target="_blank" rel="noopener noreferrer">
+          <FatText className="vodUrl" text={`[${vod}]`} />
+        </a>
       </Buttons>
 
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes    `} />
-      <a href={vod} target="_blank" rel="noopener noreferrer">
-        <FatText className="vodUrl" text={`[${vod}]`} />
-      </a>
 
       <Caption>
         <FatText text={username} />
