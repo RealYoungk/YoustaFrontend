@@ -7,7 +7,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
-
+//asdfasd
 const Wrapper = styled.div`
   min-height: 100vh;
 `;

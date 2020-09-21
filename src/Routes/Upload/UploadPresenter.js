@@ -4,9 +4,9 @@ import { UPLOAD } from "./UploadQueries";
 import Input from "../../Components/Input";
 import { withRouter } from "react-router-dom";
 import useInput from "../../Hooks/useInput";
-import { useMutation, useQuery } from "react-apollo-hooks";
+import { useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
-import { ME } from "../../SharedQueries";
+// import { ME } from "../../SharedQueries";
 import { Helmet } from "react-helmet";
 import Button from "../../Components/Button";
 
@@ -70,9 +70,8 @@ export default withRouter(({ history, location }) => {
   const onSubmit = async (e) => {
     try {
       await uploadMutation();
-
       window.location.href = `/`;
-      history.push(`/${data.me.username}`);
+      // history.push(`/${data.me.username}`);
     } catch (e) {
       toast.error("Cant upload post");
     }
@@ -86,7 +85,6 @@ export default withRouter(({ history, location }) => {
       <form onSubmit={onSubmit}>
         <UrlInput placeholder={"URL"} {...vod} />
         <CaptionInput placeholder={"Caption"} {...caption} />
-
         <HashtagsInput placeholder={"Hashtag"} {...hashtags} />
         <Selection>
           <Button text={"Upload"} />

@@ -117,8 +117,7 @@ const Caption = styled.div`
 `;
 
 const Hashtag = styled.div`
-  margin: 15px 0px;
-
+  margin: 15px 15px;
   color: violet;
   span {
     margin-right: 5px;

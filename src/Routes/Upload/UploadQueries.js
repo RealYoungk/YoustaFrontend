@@ -1,21 +1,20 @@
 import { gql } from "apollo-boost";
 
 export const UPLOAD = gql`
-<<<<<<< HEAD
-  mutation upload($caption: String!, $vod: String!) {
-    upload(caption: $caption, vod: $vod) {
-=======
   mutation upload($caption: String!, $vod: String!, $hashtags: String) {
     upload(caption: $caption, vod: $vod, hashtags: $hashtags) {
 >>>>>>> master
+=======
+  mutation upload($caption: String!, $vod: String!, $hashtags: String) {
+    upload(caption: $caption, vod: $vod, hashtags: $hashtags) {
+>>>>>>> c52c5949eeaa4271c4ad5f93671845b44d94dfab
       user {
         username
       }
     }
   }
 `;
-<<<<<<< HEAD
-=======
+
 
 // export const ADD_HASHTAGS = gql`
 //   mutation addHashtags($postId: String!, $hashtags: String!) {
@@ -28,4 +27,4 @@ export const UPLOAD = gql`
 //     }
 //   }
 // `;
->>>>>>> master
+
