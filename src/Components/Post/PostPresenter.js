@@ -118,6 +118,7 @@ const Caption = styled.div`
 
 const Hashtag = styled.div`
   margin: 15px 0px;
+
   color: violet;
   span {
     margin-right: 5px;
@@ -169,6 +170,9 @@ export default ({
         <Button>
           <CommentIcon />
         </Button>
+        <a href={vod} target="_blank" rel="noopener noreferrer">
+          <FatText className="vodUrl" text={`[${vod}]`} />
+        </a>
       </Buttons>
 
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes    `} />

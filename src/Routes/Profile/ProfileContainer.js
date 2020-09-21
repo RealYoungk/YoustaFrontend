@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { gql } from "apollo-boost";
 import { withRouter } from "react-router-dom";
 import { useQuery, useMutation } from "react-apollo-hooks";
