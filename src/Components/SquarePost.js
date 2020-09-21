@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { HeartFull, CommentFull } from "./Icons";
+import Detail from "../Routes/Detail";
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
@@ -42,9 +43,13 @@ const NumberText = styled.span`
   font-size: 16px;
 `;
 
-const SquarePost = ({ likeCount, commentCount, vod }) => {
+const SquarePost = ({ id,likeCount, commentCount, vod,onClick,onChose }) => {
+  const onPush=()=>{
+    onChose(vod,id);
+    onClick();
+  }
   return (
-    <Container bg={`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`}>
+    <Container bg={`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`} onClick={onPush}>
       <Overlay>
         <Number>
           <HeartFull />

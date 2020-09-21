@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader";
@@ -7,7 +7,8 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
-//asdfasd
+import Detail from "../Detail";
+
 const Wrapper = styled.div`
   min-height: 100vh;
 `;
@@ -60,7 +61,7 @@ const Posts = styled.div`
   grid-auto-rows: 200px;
 `;
 
-export default ({ loading, data, logOut }) => {
+export default ({ loading, data, logOut,onClick,flag,onChose,urlS,postId }) => {
   if (loading === true) {
     return (
       <Wrapper>
@@ -83,6 +84,8 @@ export default ({ loading, data, logOut }) => {
         posts,
       },
     } = data;
+    if(flag)
+    {
     return (
       <Wrapper>
         <Helmet>
@@ -120,7 +123,10 @@ export default ({ loading, data, logOut }) => {
           {posts &&
             posts.map((post) => (
               <SquarePost
+              onClick={onClick}
+              onChose={onChose}
                 key={post.id}
+                id={post.id}
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
                 vod={post.vod}
@@ -129,6 +135,11 @@ export default ({ loading, data, logOut }) => {
         </Posts>
       </Wrapper>
     );
+  
+  }else
+  {
+    return <Detail onClick={onClick} url={urlS} posts={posts} avatar={avatar} username={username} postId={postId}></Detail>
   }
+}
   return null;
 };
