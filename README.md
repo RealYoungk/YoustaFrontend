@@ -9,3 +9,7 @@ React + Apollo + Graphql
 - git fetch origin
 - git checkout master
 - git pull origin/master
+
+#### Todo List
+- [ ] 프로필에서 Post 정리하기
+- [ ] 프론트에서 인덱싱 가능하게 하게(백엔드 일단x)
