@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { UPLOAD } from "./UploadQueries";
 import Input from "../../Components/Input";
@@ -53,10 +53,21 @@ const Selection = styled.div`
   width: 30%;
 `;
 
+const Thumbnail = styled.div`
+background-image: url(${(props)=> props.bg});
+background-size: 745px 400px;
+ margin-left: 100px;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 745px;
+  height:400px;
+`;
+
 export default withRouter(({ history, location }) => {
   const vod = useInput("");
   const caption = useInput("");
   const hashtags = useInput("");
+  const [flag,setFlag] = useState("");
   const [uploadMutation] = useMutation(UPLOAD, {
     variables: {
       caption: caption.value,
@@ -71,10 +82,22 @@ export default withRouter(({ history, location }) => {
     try {
       await uploadMutation();
       history.push(`/${data.me.username}`);
+      window.location.reload(true);
     } catch (e) {
       toast.error("Cant upload post");
     }
   };
+  const onChange =()=>{
+  if(vod.value==="")
+  {
+    setFlag("");
+  }
+  else
+  {
+    setFlag(`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`);
+  }
+}
+console.log(vod.value);
 
   return (
     <Wrapper>
@@ -82,9 +105,11 @@ export default withRouter(({ history, location }) => {
         <title>Upload | Prismagram</title>
       </Helmet>
       <form onSubmit={onSubmit}>
-        <UrlInput placeholder={"URL"} {...vod} />
+        <UrlInput placeholder={"URL"} value={vod.value} onChange={vod.onChange} />
         <CaptionInput placeholder={"Caption"} {...caption} />
-        <HashtagsInput placeholder={"Hashtag"} {...hashtags} />
+        <HashtagsInput placeholder={"Hashtag"} {...hashtags} /> 
+        <Thumbnail bg={vod.value!==""?`http://img.youtube.com/vi/${vod.value.substr(32, 11)}/0.jpg`:""} onChange={vod.onChange}/>
+
         <Selection>
           <Button text={"Upload"} />
         </Selection>
