@@ -71,6 +71,7 @@ export default withRouter(({ history, location }) => {
     try {
       await uploadMutation();
       history.push(`/${data.me.username}`);
+      window.location.reload(true);
     } catch (e) {
       toast.error("Cant upload post");
     }
