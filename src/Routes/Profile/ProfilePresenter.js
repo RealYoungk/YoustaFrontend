@@ -8,6 +8,7 @@ import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import Detail from "../Detail";
+import Category from "../Category";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -61,7 +62,7 @@ const Posts = styled.div`
   grid-auto-rows: 200px;
 `;
 
-export default ({ loading, data, logOut,onClick,flag,onChose,urlS,postId }) => {
+export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId }) => {
   if (loading === true) {
     return (
       <Wrapper>
@@ -82,64 +83,72 @@ export default ({ loading, data, logOut,onClick,flag,onChose,urlS,postId }) => {
         followersCount,
         postsCount,
         posts,
+        categories,
       },
     } = data;
-    if(flag)
-    {
-    return (
-      <Wrapper>
-        <Helmet>
-          <title>{username} | Prismagram</title>
-        </Helmet>
-        <Header>
-          <HeaderColumn>
-            <Avatar size="lg" url={avatar} />
-          </HeaderColumn>
-          <HeaderColumn>
-            <UsernameRow>
-              <Username>{username}</Username>{" "}
-              {isSelf ? (
-                <Button onClick={logOut} text="Log Out" />
-              ) : (
-                <FollowButton isFollowing={isFollowing} id={id} />
-              )}
-            </UsernameRow>
-            <Counts>
-              <Count>
-                <FatText text={String(postsCount)} /> posts
-              </Count>
-              <Count>
-                <FatText text={String(followersCount)} /> followers
-              </Count>
-              <Count>
-                <FatText text={String(followingCount)} /> following
-              </Count>
-            </Counts>
-            <FullName text={fullName} />
-            <Bio>{bio}</Bio>
-          </HeaderColumn>
-        </Header>
-        <Posts>
-          {posts &&
-            posts.map((post) => (
-              <SquarePost
-              onClick={onClick}
-              onChose={onChose}
-                key={post.id}
-                id={post.id}
-                likeCount={post.likeCount}
-                commentCount={post.commentCount}
-                vod={post.vod}
-              />
-            ))}
-        </Posts>
-      </Wrapper>
-    );
-  
-  }else
-  {
-    return <Detail onClick={onClick} url={urlS} posts={posts} avatar={avatar} username={username} postId={postId}></Detail>
+    if (flag) {
+      return (
+        <Wrapper>
+          <Helmet>
+            <title>{username} | Prismagram</title>
+          </Helmet>
+          <Header>
+            <HeaderColumn>
+              <Avatar size="lg" url={avatar} />
+            </HeaderColumn>
+            <HeaderColumn>
+              <UsernameRow>
+                <Username>{username}</Username>{" "}
+                {isSelf ? (
+                  <Button onClick={logOut} text="Log Out" />
+                ) : (
+                  <FollowButton isFollowing={isFollowing} id={id} />
+                )}
+              </UsernameRow>
+              <Counts>
+                <Count>
+                  <FatText text={String(postsCount)} /> posts
+                </Count>
+                <Count>
+                  <FatText text={String(followersCount)} /> followers
+                </Count>
+                <Count>
+                  <FatText text={String(followingCount)} /> following
+                </Count>
+              </Counts>
+              <FullName text={fullName} />
+              <Bio>{bio}</Bio>
+            </HeaderColumn>
+          </Header>
+          <Category categories={categories} userId={id} />
+          <Posts>
+            {posts &&
+              posts.map((post) => (
+                <SquarePost
+                  onClick={onClick}
+                  onChose={onChose}
+                  key={post.id}
+                  id={post.id}
+                  likeCount={post.likeCount}
+                  commentCount={post.commentCount}
+                  vod={post.vod}
+                />
+              ))}
+          </Posts>
+        </Wrapper>
+      );
+    } else {
+      return (
+        <Detail
+          onClick={onClick}
+          url={urlS}
+          posts={posts}
+          avatar={avatar}
+          username={username}
+          postId={postId}
+        ></Detail>
+      );
+    }
   }
-}
   return null;
 };
