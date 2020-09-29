@@ -86,6 +86,7 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId })
         categories,
       },
     } = data;
+
     if (flag) {
       return (
         <Wrapper>
@@ -120,8 +121,14 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId })
               <Bio>{bio}</Bio>
             </HeaderColumn>
           </Header>
-          <Category categories={categories} userId={id} />
-          <Posts>
+          <Category
+            categories={categories}
+            userId={id}
+            posts={posts}
+            onClick={onClick}
+            onChose={onChose}
+          />
+          {/* <Posts>
             {posts &&
               posts.map((post) => (
                 <SquarePost
@@ -134,7 +141,7 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId })
                   vod={post.vod}
                 />
               ))}
-          </Posts>
+          </Posts> */}
         </Wrapper>
       );
     } else {
@@ -146,6 +153,7 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId })
           avatar={avatar}
           username={username}
           postId={postId}
+          categories={categories}
         ></Detail>
       );
     }

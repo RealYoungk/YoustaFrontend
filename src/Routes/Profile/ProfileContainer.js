@@ -30,6 +30,10 @@ const GET_USER = gql`
             username
           }
         }
+        categories {
+          id
+          index
+        }
         vod
         likeCount
         commentCount
@@ -53,6 +57,7 @@ export default withRouter(
     const [flag, setFlag] = useState(true);
     const [urlS, setUrls] = useState();
     const [postId, setPostId] = useState();
+
     const onClick = () => {
       if (flag === true) {
         setFlag(false);

@@ -3,10 +3,12 @@ import TextareaAutosize from "react-autosize-textarea/lib";
 import styled from "styled-components";
 import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
+import Input from "../../Components/Input";
 
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 500px);
+  grid-template-rows: repeat(2, 50vh);
   min-height: 100vh;
   min-width: 100vh;
 `;
@@ -19,7 +21,7 @@ const Images = styled.div`
 `;
 const Comments = styled.div`
   display: grid;
-  grid-template-rows: 100px 370px 80px;
+  grid-template-rows: 100px 300px 80px;
   width: 500px;
   height: 50vh;
 `;
@@ -28,10 +30,11 @@ const Comment = styled.div`
 `;
 const Info = styled.div`
   display: grid;
-  grid-template-columns: 70px 230px 200px;
+  grid-template-columns: 100px 200px 200px;
   padding-top: 20px;
   padding-left: 20px;
   background-image: ${(props) => props.theme.whiteBox};
+  height: 80px;
 `;
 
 const Text = styled.div`
@@ -39,7 +42,7 @@ const Text = styled.div`
   font-size: 20px;
 `;
 const Textarea = styled.div`
-  margin-top: 5px;
+  /* margin-top: 5px; */
   background-image: ${(props) => props.theme.whiteBox};
 `;
 const Span = styled.div`
@@ -67,6 +70,8 @@ const Detail = ({
   onKeyPress,
   newComment,
   setSelfComments,
+  indexNumber,
+  onKeyPressIndex,
 }) => {
   return (
     <Wrapper>
@@ -109,6 +114,13 @@ const Detail = ({
           placeholder={"Add a Comment..."}
         />
       </Comments>
+      <Input
+        placeholder={"이동할 인덱스 넘버를 입력해주세요..."}
+        value={indexNumber.value}
+        onChange={indexNumber.onChange}
+        type={"text"}
+        onKeyPress={onKeyPressIndex}
+      />
     </Wrapper>
   );
 };
