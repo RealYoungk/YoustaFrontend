@@ -12,7 +12,7 @@ import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
   ${(props) => props.theme.whiteBox} /* padding: 1rem; */
-  height: 80vh;
+  height: 120vh;
   text-align: center;
 `;
 
@@ -54,20 +54,20 @@ const Selection = styled.div`
 `;
 
 const Thumbnail = styled.div`
-background-image: url(${(props)=> props.bg});
-background-size: 745px 400px;
- margin-left: 100px;
+  background-image: url(${(props) => props.bg});
+  background-size: 745px 400px;
+  margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
   width: 745px;
-  height:400px;
+  height: 400px;
 `;
 
 export default withRouter(({ history, location }) => {
   const vod = useInput("");
   const caption = useInput("");
   const hashtags = useInput("");
-  const [flag,setFlag] = useState("");
+  const [flag, setFlag] = useState("");
   const [uploadMutation] = useMutation(UPLOAD, {
     variables: {
       caption: caption.value,
@@ -87,17 +87,14 @@ export default withRouter(({ history, location }) => {
       toast.error("Cant upload post");
     }
   };
-  const onChange =()=>{
-  if(vod.value==="")
-  {
-    setFlag("");
-  }
-  else
-  {
-    setFlag(`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`);
-  }
-}
-console.log(vod.value);
+  const onChange = () => {
+    if (vod.value === "") {
+      setFlag("");
+    } else {
+      setFlag(`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`);
+    }
+  };
+  console.log(vod.value);
 
   return (
     <Wrapper>
@@ -107,8 +104,11 @@ console.log(vod.value);
       <form onSubmit={onSubmit}>
         <UrlInput placeholder={"URL"} value={vod.value} onChange={vod.onChange} />
         <CaptionInput placeholder={"Caption"} {...caption} />
-        <HashtagsInput placeholder={"Hashtag"} {...hashtags} /> 
-        <Thumbnail bg={vod.value!==""?`http://img.youtube.com/vi/${vod.value.substr(32, 11)}/0.jpg`:""} onChange={vod.onChange}/>
+        <HashtagsInput placeholder={"Hashtag"} {...hashtags} />
+        <Thumbnail
+          bg={vod.value !== "" ? `http://img.youtube.com/vi/${vod.value.substr(32, 11)}/0.jpg` : ""}
+          onChange={vod.onChange}
+        />
 
         <Selection>
           <Button text={"Upload"} />

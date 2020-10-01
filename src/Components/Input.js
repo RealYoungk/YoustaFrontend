@@ -17,11 +17,13 @@ const Input = ({
   required = true,
   value,
   onChange,
+  onKeyPress,
   type = "text",
   className,
   vod,
   caption,
   hashtags,
+  category,
 }) => (
   <Container
     className={className}
@@ -29,10 +31,12 @@ const Input = ({
     required={required}
     value={value}
     onChange={onChange}
+    onKeyPress={onKeyPress}
     type={type}
     caption={caption}
     vod={vod}
     hashtags={hashtags}
+    category={category}
   />
 );
 
@@ -44,6 +48,7 @@ Input.propTypes = {
   type: PropTypes.string,
   caption: PropTypes.string,
   vod: PropTypes.string,
+  category: PropTypes.string,
 };
 
 export default Input;
