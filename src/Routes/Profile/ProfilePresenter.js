@@ -62,7 +62,7 @@ const Posts = styled.div`
   grid-auto-rows: 200px;
 `;
 
-export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId }) => {
+export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId,onRemove,commentRemove,commentAdd,add }) => {
   if (loading === true) {
     return (
       <Wrapper>
@@ -154,6 +154,10 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId })
           username={username}
           postId={postId}
           categories={categories}
+          onRemove={onRemove}
+          commentRemove={commentRemove}
+          commentAdd={commentAdd}
+          add={add}
         ></Detail>
       );
     }
