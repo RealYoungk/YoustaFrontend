@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import TextareaAutosize from "react-autosize-textarea/lib";
 import styled from "styled-components";
 import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
 import Input from "../../Components/Input";
-
+import {Delete} from "../../Components/Icons";
+import CommentList from "../Delete/CommentList";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 500px);
@@ -26,7 +27,11 @@ const Comments = styled.div`
   height: 50vh;
 `;
 const Comment = styled.div`
-  margin-top: 15px;
+margin-top: 5px;
+font-size:20px;
+  display:grid;
+  grid-template-columns:50px 400px 50px;
+  margin-left:20px;
 `;
 const Info = styled.div`
   display: grid;
@@ -66,12 +71,16 @@ const Detail = ({
   posts,
   avatar,
   username,
-  del,
+  delFeed,
+  delComment,
   onKeyPress,
   newComment,
   setSelfComments,
   indexNumber,
   onKeyPressIndex,
+  onRemove,
+  commentRemove,
+  commentAdd
 }) => {
   return (
     <Wrapper>
@@ -86,7 +95,7 @@ const Detail = ({
             <FatText text={username} />
           </Text>
           <Span>
-            <button onClick={del}>삭제</button>
+            <button onClick={delFeed}>삭제</button>
           </Span>
         </Info>
         <Textarea>
@@ -95,15 +104,11 @@ const Detail = ({
               post.id === postId &&
               post.commentCount !== 0 &&
               post.comments.map((texts) => (
-                <Comment>
-                  <FatText text={texts.user.username + " : " + texts.text} />
-                </Comment>
+              <CommentList text={texts.text} id={texts.id} username={texts.user.username} avatar={avatar} postId={postId} onRemove={onRemove} commentRemove={commentRemove}/>
               ))
           )}
-          {setSelfComments.map((texts) => (
-            <Comment>
-              <FatText text={texts.user.username + " : " + texts.text} />
-            </Comment>
+          {commentAdd.map((texts) => (
+            <CommentList text={texts.addComment.text} id={texts.addComment.id} username={texts.addComment.user.username} avatar={avatar} postId={postId} onRemove={onRemove} commentRemove={commentRemove} commentAdd={commentAdd}/>
           ))}
         </Textarea>
 

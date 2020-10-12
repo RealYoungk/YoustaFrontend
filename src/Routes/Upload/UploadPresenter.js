@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { UPLOAD } from "./UploadQueries";
 import Input from "../../Components/Input";
@@ -94,8 +94,11 @@ export default withRouter(({ history, location }) => {
       setFlag(`http://img.youtube.com/vi/${vod.substr(32, 11)}/0.jpg`);
     }
   };
-  console.log(vod.value);
-
+  useEffect(()=>{
+    return()=>{
+      window.location.reload(true);
+    }
+  },[])
   return (
     <Wrapper>
       <Helmet>
