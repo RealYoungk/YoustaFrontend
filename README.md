@@ -33,5 +33,6 @@ yarn add @babel/cli
 yarn add @babel/plugin-transform-runtime -D
 yarn add @babel/runtime
 ```
+.babelrc => {"plugins" : ["@babel/plugin-transform-runtime"]}
 설치하고 yarn build를 하였다.
 graphql파일들을 복사하지 않아서 에러가 발생하였다. graphql파일들을 다음 강의에서 복사할 예정.
