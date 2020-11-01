@@ -24,3 +24,14 @@ React + Apollo + Graphql
 - Navigate to Build & Deploy
 - Under Continuous Deployment select Edit settings
 - Update Build command to: CI= npm run build
+
+#### 19.1 Building the Server
+백앤드 빌딩을 시작하였다. 백앤드 빌딩을 위해선 못생긴 코드로 바꿔줘야 한다.
+스크립트를 "babel src -d build" 로 수정하고,
+```
+yarn add @babel/cli
+yarn add @babel/plugin-transform-runtime -D
+yarn add @babel/runtime
+```
+설치하고 yarn build를 하였다.
+graphql파일들을 복사하지 않아서 에러가 발생하였다. graphql파일들을 다음 강의에서 복사할 예정.
