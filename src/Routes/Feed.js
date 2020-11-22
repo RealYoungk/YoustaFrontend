@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
@@ -46,7 +46,11 @@ const Wrapper = styled.div`
 
 export default () => {
   const { data, loading } = useQuery(FEED_QUERY);
-
+  useEffect(()=>{
+    return()=>{
+      window.location.reload(true);
+    }
+  },[])
   return (
     <Wrapper>
       <Helmet>

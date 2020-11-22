@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { gql } from "apollo-boost";
 import { withRouter } from "react-router-dom";
 import { useQuery, useMutation } from "react-apollo-hooks";
@@ -25,6 +25,7 @@ const GET_USER = gql`
       posts {
         id
         comments {
+          id
           text
           user {
             username
@@ -70,7 +71,15 @@ export default withRouter(
     };
 
     const { data, loading } = useQuery(GET_USER, { variables: { username } });
-
+    
+    const [commentRemove,setcommentRemove]=useState([]);
+    const [commentAdd,setcommentAdd] = useState([]);
+    const onRemove =(postId,id)=>{
+      setcommentRemove([...commentRemove,id]);
+    }
+    const add=({addComment},postId)=>{
+      setcommentAdd([...commentAdd,{addComment,postId}]);
+    }
     const [logOut] = useMutation(LOG_OUT);
     return (
       <ProfilePresenter
@@ -82,6 +91,10 @@ export default withRouter(
         flag={flag}
         urlS={urlS}
         postId={postId}
+        onRemove={onRemove}
+        commentRemove={commentRemove}
+        commentAdd={commentAdd}
+        add={add}
       />
     );
   }

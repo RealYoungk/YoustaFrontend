@@ -6,10 +6,12 @@ import useInput from "../../Hooks/useInput";
 import { DELETEPOST } from "../Delete/DeleteQueries";
 import DetailPresenter from "./DetailPresenter";
 import { ADD_INDEX } from "./DetailQueries";
+import {DELETE_COMMENT} from "../Delete/CommentDelete";
+import { useHistory } from "react-router-dom";
 
-export default ({ postId, url, onClick, posts, avatar, username, categories }) => {
+export default ({ postId, url, onClick, posts, avatar, username, categories,commentRemove,onRemove,commentAdd,add}) => {
   const [delMutation] = useMutation(DELETEPOST, { variables: { id: postId } });
-  const del = () => {
+  const delFeed = () => {
     delMutation();
     window.location.reload(true);
   };
@@ -44,6 +46,7 @@ export default ({ postId, url, onClick, posts, avatar, username, categories }) =
           data: { addComment },
         } = await addCommentMutation();
         setSelfComments([...selfComments, addComment]);
+        add({addComment},postId);
         comment.setValue("");
       } catch {
         toast.error("Can't send comment");
@@ -76,12 +79,15 @@ export default ({ postId, url, onClick, posts, avatar, username, categories }) =
       posts={posts}
       avatar={avatar}
       username={username}
-      del={del}
+      delFeed={delFeed}
       onKeyPress={onKeyPress}
       newComment={comment}
       setSelfComments={selfComments}
       indexNumber={indexNumber}
       onKeyPressIndex={onKeyPressIndex}
+      onRemove={onRemove}
+      commentRemove={commentRemove}
+      commentAdd={commentAdd}
     />
   );
 };
