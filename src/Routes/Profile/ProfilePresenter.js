@@ -9,6 +9,10 @@ import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import Detail from "../Detail";
 import Category from "../Category";
+import { Setting } from "../../Components/Icons";
+import _File from "../../Components/File"
+import Dialog from "../../Components/Dialog"
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -28,11 +32,14 @@ const HeaderColumn = styled.div``;
 const UsernameRow = styled.div`
   display: flex;
   align-items: center;
+  width: 120%;
+
 `;
 
 const Username = styled.span`
   font-size: 26px;
   display: block;
+  margin-right:20px;
 `;
 
 const Counts = styled.ul`
@@ -62,7 +69,17 @@ const Posts = styled.div`
   grid-auto-rows: 200px;
 `;
 
-export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId,onRemove,commentRemove,commentAdd,add }) => {
+const SettingS = styled.div`
+margin-left:20px
+`;
+const Blind =styled.div`
+background-color: rgba(0, 0, 0, 0.6);
+opacity: 0.8;
+`;
+const HeaderLink = styled(Link)`
+width:max;
+`;
+export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId,onRemove,commentRemove,commentAdd,add,option,onOption }) => {
   if (loading === true) {
     return (
       <Wrapper>
@@ -86,7 +103,6 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId,on
         categories,
       },
     } = data;
-
     if (flag) {
       return (
         <Wrapper>
@@ -99,12 +115,16 @@ export default ({ loading, data, logOut, onClick, flag, onChose, urlS, postId,on
             </HeaderColumn>
             <HeaderColumn>
               <UsernameRow>
-                <Username>{username}</Username>{" "}
+                <Username>{username}</Username>
                 {isSelf ? (
-                  <Button onClick={logOut} text="Log Out" />
-                ) : (
+                  <HeaderLink to="/account">
+                  <Button text="프로필 변경"/>
+                 </HeaderLink>
+                  ) : (
                   <FollowButton isFollowing={isFollowing} id={id} />
                 )}
+                 <SettingS onClick={onOption}><Setting /></SettingS>
+                 <Dialog _flag={option} onOption={onOption} logOut={logOut}/>
               </UsernameRow>
               <Counts>
                 <Count>

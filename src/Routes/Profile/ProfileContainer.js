@@ -58,6 +58,7 @@ export default withRouter(
     const [flag, setFlag] = useState(true);
     const [urlS, setUrls] = useState();
     const [postId, setPostId] = useState();
+    const [option,setOption]=useState(0);
 
     const onClick = () => {
       if (flag === true) {
@@ -69,6 +70,12 @@ export default withRouter(
       setUrls(file);
       setPostId(id);
     };
+    const onOption=()=>{
+      if(option===0)
+      setOption(1);
+      else
+      setOption(0);
+    }
 
     const { data, loading } = useQuery(GET_USER, { variables: { username } });
     
@@ -95,6 +102,8 @@ export default withRouter(
         commentRemove={commentRemove}
         commentAdd={commentAdd}
         add={add}
+        option={option}
+        onOption={onOption}
       />
     );
   }

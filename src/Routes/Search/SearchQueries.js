@@ -7,6 +7,7 @@ export const SEARCH = gql`
       vod
       likeCount
       commentCount
+      caption
     }
     searchUser(term: $term) {
       id
