@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
 import useInput from "../../Hooks/useInput";
@@ -10,6 +10,7 @@ export default ({ userId, categories, posts, onClick, onChose }) => {
   const nextIndex = useRef(categories.length + 1);
   categories.map((category) => {
     category.checked = false;
+    return null;
   });
   const nowIndex = useRef(0);
   const [selfContents, setSelfContents] = useState(
