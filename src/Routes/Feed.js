@@ -44,12 +44,14 @@ const Wrapper = styled.div`
   min-height: 80vh;
 `;
 
-export default () => {
-  const { data, loading } = useQuery(FEED_QUERY);
+export default async () => {
+  const { data, loading } = await useQuery(FEED_QUERY);
   // window.location.reload(true);
-  useEffect(() => {
-    window.location.reload(true);
-  }, [data]);
+  // useEffect(() => {
+  //   return () => {
+  //     window.location.reload(true);
+  //   };
+  // }, []);
   return (
     <Wrapper>
       <Helmet>
