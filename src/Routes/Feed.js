@@ -46,11 +46,12 @@ const Wrapper = styled.div`
 
 export default () => {
   const { data, loading } = useQuery(FEED_QUERY);
-  useEffect(()=>{
-    return()=>{
-      window.location.reload(true);
-    }
-  },[])
+  window.location.reload(true);
+  // useEffect(() => {
+  //   return () => {
+  //     window.location.reload(true);
+  //   };
+  // }, []);
   return (
     <Wrapper>
       <Helmet>
