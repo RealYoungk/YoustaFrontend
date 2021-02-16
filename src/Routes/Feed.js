@@ -44,8 +44,9 @@ const Wrapper = styled.div`
   min-height: 80vh;
 `;
 
-export default async () => {
-  const { data, loading } = await useQuery(FEED_QUERY);
+export default () => {
+  const { data, loading } = useQuery(FEED_QUERY);
+  console.log(data, loading);
   // window.location.reload(true);
   // useEffect(() => {
   //   return () => {
